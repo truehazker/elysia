@@ -6,8 +6,7 @@ import {
 	TObject,
 	TransformKind,
 	TSchema,
-	type TAnySchema,
-	type Static
+	type TAnySchema
 } from '@sinclair/typebox'
 import { Value } from '@sinclair/typebox/value'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
@@ -28,7 +27,8 @@ import type {
 	InputSchema,
 	MaybeArray,
 	StandaloneInputSchema,
-	StandardSchemaV1LikeValidate
+	StandardSchemaV1LikeValidate,
+	UnwrapSchema
 } from './types'
 
 import type { StandardSchemaV1Like } from './types'
@@ -40,10 +40,10 @@ export interface ElysiaTypeCheck<T extends TSchema>
 	provider: 'typebox' | 'standard'
 	schema: T
 	config: Object
-  Clean?(v: unknown): Static<T>
-	parse(v: unknown): Static<T>
+	Clean?(v: unknown): UnwrapSchema<T>
+	parse(v: unknown): UnwrapSchema<T>
 	safeParse(v: unknown):
-		| { success: true; data: Static<T>; error: null }
+		| { success: true; data: UnwrapSchema<T>; error: null }
 		| {
 				success: false
 				data: null
